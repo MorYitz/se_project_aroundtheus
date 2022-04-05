@@ -10,4 +10,4 @@
 - CS
 - basic javascript
 
-#### link to the Github page
+#### [link to the Github page] (https://moryitz.github.io/web_project_4/)
