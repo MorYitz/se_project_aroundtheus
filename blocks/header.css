@@ -1,0 +1,24 @@
+.header {
+  box-sizing: border-box;
+  max-width: 880px;
+  width: 100%;
+  margin: 45px auto 40px auto;
+  border-bottom: 1px solid #545454;
+  display: flex;
+}
+.header__image {
+  max-width: 490px;
+  width: 100%;
+}
+
+@media screen and (max-width: 910px) {
+  .header {
+    max-width: calc(282px * 2 + 20px);
+  }
+}
+@media screen and (max-width: 620px) {
+  .header {
+    margin-top: 28px;
+    max-width: 282px;
+  }
+}

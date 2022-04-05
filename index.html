@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Around The U.S</title>
+    <meta name="decription" content="Playlist" />
+    <meta name="author" content="Yitzchak Morvay" />
+    <meta
+      name="keywords"
+      content="Yandex web-development  meta element meta name=keywords content=which is supposed to provide keywords for search engines to determine relevance of that page for different search terms — is ignored by search engines, because spammers were just filling the keyword list with hundreds of keywords, biasing results."
+    />
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+
+  <body class="body">
+    <div class="page">
+      <header class="header">
+        <img
+          class="header__image"
+          src="./images/Header.svg"
+          alt="header image"
+        />
+      </header>
+      <main class="main">
+      <div class="popup">
+        <div class="popup__box">
+          <button class="popup__close-button" aria-label="close button" type="button"></button>
+          <form class="popup__form" name="register" id="form">
+            <h3 class="popup__title">Edit profile</h3>
+            <input
+              class="popup__form_type_name"
+              type="text"
+              id="name"
+              name="fullName"
+              placeholder="Full Name"
+              value="Jacques Cousteau"
+              required
+            />
+            <input
+              class="popup__form_type_class"
+              type="text"
+              id="class"
+              name="className"
+              placeholder="Class"
+              value="explorer"
+              required
+            />
+            <button class="popup__submit-button" type="submit">Save</button> 
+          </form>
+        </div>
+      </div>
+      <section class="profile">
+        <img
+          class="profile__image"
+          src="./images/Avatar.svg"
+          alt="avatar image"
+        />
+        <div class="profile__info">
+          <p class="profile__info-title">Jacques Cousteau</p>
+          <img
+            class="profile__edit-button"
+            src="./images/Edit Button.svg"
+            alt="button for editing"
+          />
+          <p class="profile__info-class">Explorer</p>
+        </div>
+        <img
+          class="profile__add-button"
+          src="./images/Add Button.svg"
+          alt="button for adding info"
+        />
+      </section>
+      <section class="elements">
+        <div class="element">
+          <img
+            class="element__image"
+            src="./images/image-1.jpg"
+            alt="image of yosemite valley"
+          />
+          <div class="element__group">
+            <p class="element element__group_type_name">Yosemite Valley</p>
+            <button
+                  aria-label="button"
+                  id="like"
+                  class="element element__group_type_like"
+                ></button>
+          </div>
+        </div>
+        <div class="element">
+          <img
+            class="element__image"
+            src="./images/image-2.jpg"
+            alt="image of lake louise"
+          />
+          <div class="element__group">
+            <p class="element element__group_type_name">Lake Louise</p>
+            <button
+                  aria-label="button"
+                  id="like"
+                  class="element element__group_type_like"
+                ></button>
+          </div>
+        </div>
+        <div class="element">
+          <img
+            class="element__image"
+            src="./images/image-3.jpg"
+            alt="image of bald mountains"
+          />
+          <div class="element__group">
+            <p class="element element__group_type_name">Bald Mountains</p>
+            <button
+                  aria-label="button"
+                  id="like"
+                  class="element element__group_type_like"
+                ></button>
+          </div>
+        </div>
+        <div class="element">
+          <img
+            class="element__image"
+            src="./images/image-4.jpg"
+            alt="image of latemar"
+          />
+          <div class="element__group">
+            <p class="element element__group_type_name">Latemar</p>
+            <button
+                  aria-label="button"
+                  id="like"
+                  class="element element__group_type_like"
+                ></button>
+          </div>
+        </div>
+        <div class="element">
+          <img
+            class="element__image"
+            src="./images/image-5.jpg"
+            alt="image of vanoise national"
+          />
+          <div class="element__group">
+            <p class="element element__group_type_name">Vanoise National</p>
+            <button
+                  aria-label="button"
+                  id="like"
+                  class="element element__group_type_like"
+                ></button>
+          </div>
+        </div>
+        <div class="element">
+          <img
+            class="element__image"
+            src="./images/image-6.jpg"
+            alt="image of lago di braies"
+          />
+          <div class="element__group">
+            <p class="element element__group_type_name">Lago di braies</p>
+            <button
+            aria-label="button"
+            id="like"
+            class="element element__group_type_like"
+          ></button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2021 Around The U.S.</p>
+    </footer>
+    </div>
+    <script src="./script/index.js"></script>
+  </body>
+  
+</html>
