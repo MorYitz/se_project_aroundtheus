@@ -1,5 +1,5 @@
 .popup {
-  position: absolute;
+  position: fixed;
   display: none;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
   display: flex;
 }
 .popup__box {
-  max-width: 460px;
+  max-width: 450px;
   width: 100%;
   margin: 0 auto;
   display: flex;

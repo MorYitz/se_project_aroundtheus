@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+}
+
 .page {
   background-position: center;
   background-size: cover;
@@ -17,4 +21,5 @@
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
+  margin: 0 auto;
 }

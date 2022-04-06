@@ -2,13 +2,14 @@
   box-sizing: border-box;
   max-width: 880px;
   width: 100%;
-  margin: 45px auto 40px auto;
+  margin: 45px auto 70.25px auto;
   border-bottom: 1px solid #545454;
   display: flex;
 }
 .header__image {
-  max-width: 490px;
+  max-width: 173px;
   width: 100%;
+  padding-bottom: 41px;
 }
 
 @media screen and (max-width: 910px) {
@@ -19,6 +20,11 @@
 @media screen and (max-width: 620px) {
   .header {
     margin-top: 28px;
+
     max-width: 282px;
+  }
+  .header__image {
+    max-width: 126px;
+    padding-bottom: 32px;
   }
 }

@@ -30,7 +30,7 @@
           <form class="popup__form" name="register" id="form">
             <h3 class="popup__title">Edit profile</h3>
             <input
-              class="popup__form_type_name"
+              class="popup__form popup__form_type_name"
               type="text"
               id="name"
               name="fullName"
@@ -39,7 +39,7 @@
               required
             />
             <input
-              class="popup__form_type_class"
+              class="popup__form popup__form_type_class"
               type="text"
               id="class"
               name="className"
@@ -66,11 +66,11 @@
           />
           <p class="profile__info-class">Explorer</p>
         </div>
-        <img
+        <button
           class="profile__add-button"
-          src="./images/Add-Button.svg"
-          alt="button for adding info"
-        />
+          type="button"
+          aria-label="add button"
+        ></button>
       </section>
       <section class="elements">
         <div class="element">
@@ -80,11 +80,11 @@
             alt="image of yosemite valley"
           />
           <div class="element__group">
-            <p class="element element__group_type_name">Yosemite Valley</p>
+            <p class="element__name">Yosemite Valley</p>
             <button
                   aria-label="button"
                   
-                  class="element element__group_type_like"
+                  class="element__like-button"
                 ></button>
           </div>
         </div>
@@ -95,11 +95,11 @@
             alt="image of lake louise"
           />
           <div class="element__group">
-            <p class="element element__group_type_name">Lake Louise</p>
+            <p class="element__name">Lake Louise</p>
             <button
                   aria-label="button"
                   
-                  class="element element__group_type_like"
+                  class="element__like-button"
                 ></button>
           </div>
         </div>
@@ -110,11 +110,11 @@
             alt="image of bald mountains"
           />
           <div class="element__group">
-            <p class="element element__group_type_name">Bald Mountains</p>
+            <p class="element__name">Bald Mountains</p>
             <button
                   aria-label="button"
                   
-                  class="element element__group_type_like"
+                  class="element__like-button"
                 ></button>
           </div>
         </div>
@@ -125,11 +125,11 @@
             alt="image of latemar"
           />
           <div class="element__group">
-            <p class="element element__group_type_name">Latemar</p>
+            <p class="element__name">Latemar</p>
             <button
                   aria-label="button"
                   
-                  class="element element__group_type_like"
+                  class="element__like-button"
                 ></button>
           </div>
         </div>
@@ -140,11 +140,11 @@
             alt="image of vanoise national"
           />
           <div class="element__group">
-            <p class="element element__group_type_name">Vanoise National</p>
+            <p class="element__name">Vanoise National</p>
             <button
                   aria-label="button"
                   
-                  class="element element__group_type_like"
+                  class="element__like-button"
                 ></button>
           </div>
         </div>
@@ -155,11 +155,11 @@
             alt="image of lago di braies"
           />
           <div class="element__group">
-            <p class="element element__group_type_name">Lago di braies</p>
+            <p class="element__name">Lago di braies</p>
             <button
             aria-label="button"
             
-            class="element element__group_type_like"
+            class="element__like-button"
           ></button>
           </div>
         </div>

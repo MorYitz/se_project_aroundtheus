@@ -9,9 +9,9 @@
 @font-face {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 600;
-  src: url("./Inter-SemiBold.woff") format("woff"),
-    url("./Inter-Semibold.woff2") format("woff2");
+  font-weight: 500;
+  src: url("./Inter-Medium.woff") format("woff"),
+    url("./Inter-Medium.woff2") format("woff2");
 }
 
 @font-face {

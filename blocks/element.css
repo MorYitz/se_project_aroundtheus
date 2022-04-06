@@ -20,7 +20,7 @@
   font-size: 24px;
   line-height: 29px;
 }
-.element__group_type_name {
+.element__name {
   display: inline-block;
   font-size: 24px;
   line-height: 29px;
@@ -31,18 +31,19 @@
   text-overflow: ellipsis;
   max-width: 220px;
 }
-.element__group_type_like {
+.element__like-button {
   width: 21px;
   height: 19px;
   margin-top: 5px;
   margin-right: 15px;
-  background-image: url("../images/Vector.svg");
+  background-image: url("../images/like.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-color: #fff;
   border-width: 0;
+  border-radius: 0;
 }
-.element__group_type_like:hover {
+.element__group-like-button:hover {
   opacity: 0.5;
   cursor: pointer;
 }
