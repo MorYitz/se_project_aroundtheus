@@ -24,33 +24,7 @@
         />
       </header>
       <main class="main">
-      <div class="popup">
-        <div class="popup__box">
-          <button class="popup__close-button" aria-label="close button" type="button"></button>
-          <form class="popup__form" name="register" id="form">
-            <h3 class="popup__title">Edit profile</h3>
-            <input
-              class="popup__form popup__form_type_name"
-              type="text"
-              id="name"
-              name="fullName"
-              placeholder="Full Name"
-              value="Jacques Cousteau"
-              required
-            />
-            <input
-              class="popup__form popup__form_type_class"
-              type="text"
-              id="class"
-              name="className"
-              placeholder="Class"
-              value="explorer"
-              required
-            />
-            <button class="popup__submit-button" type="submit">Save</button> 
-          </form>
-        </div>
-      </div>
+      
       <section class="profile">
         <img
           class="profile__image"
@@ -58,12 +32,12 @@
           alt="avatar image"
         />
         <div class="profile__info">
-          <p class="profile__info-title">Jacques Cousteau</p>
-          <img
-            class="profile__edit-button"
-            src="./images/Edit-Button.svg"
-            alt="button for editing"
-          />
+          <h1 class="profile__info-title">Jacques Cousteau</h1>
+          <button
+          class="profile__edit-button"
+          type="button"
+          aria-label="edit button"
+        ></button>
           <p class="profile__info-class">Explorer</p>
         </div>
         <button
@@ -73,102 +47,135 @@
         ></button>
       </section>
       <section class="elements">
-        <div class="element">
+        <ul class="elements__list">
+          <li class="element">
           <img
             class="element__image"
             src="./images/image-1.jpg"
             alt="image of yosemite valley"
           />
           <div class="element__group">
-            <p class="element__name">Yosemite Valley</p>
+            <h2 class="element__name">Yosemite Valley</h2>
             <button
                   aria-label="button"
-                  
+                  type="button"
                   class="element__like-button"
                 ></button>
-          </div>
-        </div>
-        <div class="element">
+              
+            </div>
+          </li>
+        <li class="element">
           <img
             class="element__image"
             src="./images/image-2.jpg"
             alt="image of lake louise"
           />
           <div class="element__group">
-            <p class="element__name">Lake Louise</p>
+            <h2 class="element__name">Lake Louise</h2>
             <button
                   aria-label="button"
-                  
+                  type="button"
                   class="element__like-button"
                 ></button>
           </div>
-        </div>
-        <div class="element">
+        </li>
+        <li class="element">
           <img
             class="element__image"
             src="./images/image-3.jpg"
             alt="image of bald mountains"
           />
           <div class="element__group">
-            <p class="element__name">Bald Mountains</p>
+            <h2 class="element__name">Bald Mountains</h2>
             <button
                   aria-label="button"
-                  
+                  type="button"
                   class="element__like-button"
                 ></button>
           </div>
-        </div>
-        <div class="element">
+        </li>
+        <li class="element">
           <img
             class="element__image"
             src="./images/image-4.jpg"
             alt="image of latemar"
           />
           <div class="element__group">
-            <p class="element__name">Latemar</p>
+            <h2 class="element__name">Latemar</h2>
             <button
                   aria-label="button"
-                  
+                  type="button"
                   class="element__like-button"
                 ></button>
           </div>
-        </div>
-        <div class="element">
+        </li>
+        <li class="element">
           <img
             class="element__image"
             src="./images/image-5.jpg"
             alt="image of vanoise national"
           />
           <div class="element__group">
-            <p class="element__name">Vanoise National</p>
+            <h2 class="element__name">Vanoise National</h2>
             <button
                   aria-label="button"
-                  
+                  type="button"
                   class="element__like-button"
                 ></button>
           </div>
-        </div>
-        <div class="element">
+        </li>
+        <li class="element">
           <img
             class="element__image"
             src="./images/image-6.jpg"
             alt="image of lago di braies"
           />
           <div class="element__group">
-            <p class="element__name">Lago di braies</p>
+            <h2 class="element__name">Lago di braies</h2>
             <button
             aria-label="button"
-            
+            type="button"
             class="element__like-button"
           ></button>
           </div>
-        </div>
+        </li>
+      </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2021 Around The U.S.</p>
     </footer>
     </div>
+    <div class="popup">
+        <div class="popup__box">
+          <button class="popup__close-button" aria-label="close button" type="button"></button>
+          <h3 class="popup__title">Edit profile</h3>
+          <form class="form" name="register" id="form">
+            
+            <fieldset class="form__fieldset">
+            <input
+              class="form__input"
+              type="text"
+              id="name"
+              name="fullName"
+              placeholder="Full Name"
+              value="Jacques Cousteau"
+              required
+            />
+            <input
+              class="form__input"
+              type="text"
+              id="class"
+              name="className"
+              placeholder="Class"
+              value="explorer"
+              required
+            />
+            </fieldset>
+            <button class="popup__submit-button" type="submit">Save</button> 
+          </form>
+        </div>
+      </div>
     <script src="./script/index.js"></script>
   </body>
   

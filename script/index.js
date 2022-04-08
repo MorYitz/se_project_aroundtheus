@@ -1,30 +1,31 @@
-const openformButton = document.querySelector(".profile__edit-button");
-const closeformButton = document.querySelector(".popup__close-button");
+const openFormButton = document.querySelector(".profile__edit-button");
+const closeFormButton = document.querySelector(".popup__close-button");
 const popup = document.querySelector(".popup");
-const popForm = document.getElementById("form");
+const popForm = document.querySelector(".form");
 
-let nameInput = document.querySelector(".popup__form_type_name");
-let occupationInput = document.querySelector(".popup__form_type_class");
-let textName = document.querySelector(".profile__info-title");
-let occupation = document.querySelector(".profile__info-class");
+const nameInput = document.querySelector(".form__input");
+const occupationInput = document.querySelector(".form__input:last-of-type");
+const textName = document.querySelector(".profile__info-title");
+const occupation = document.querySelector(".profile__info-class");
 
-const openform = () => {
+function openForm () {
     nameInput.value = textName.textContent;
     occupationInput.value = occupation.textContent;
     popup.classList.add("popup_open");
   };
 
-  const closeform = () => {
-    popup.classList.remove("popup_open");
-  };
   
-  const submitForm = (e) => {
+  function submitForm (e) {
     e.preventDefault();
     textName.textContent = nameInput.value;
     occupation.textContent = occupationInput.value;
     popup.classList.remove("popup_open");
   };
+  function closeForm () {
+    popup.classList.remove("popup_open");
+  };
+  
 
-  openformButton.addEventListener("click", openform);
-closeformButton.addEventListener("click", closeform);
+  openFormButton.addEventListener("click", openForm);
+closeFormButton.addEventListener("click", closeForm);
 popForm.addEventListener("submit", submitForm);

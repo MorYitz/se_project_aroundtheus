@@ -2,9 +2,8 @@
   box-sizing: border-box;
   max-width: 880px;
   width: 100%;
-  margin: 45px auto 70.25px auto;
+  margin: 45px auto 0 auto;
   border-bottom: 1px solid #545454;
-  display: flex;
 }
 .header__image {
   max-width: 173px;
