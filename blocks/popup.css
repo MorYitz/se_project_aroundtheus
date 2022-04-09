@@ -79,6 +79,10 @@
   opacity: 0.8;
 }
 @media screen and (max-width: 550px) {
+  .popup {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
   .popup__box {
     max-width: 282px;
   }

@@ -19,7 +19,7 @@ function openForm () {
     e.preventDefault();
     textName.textContent = nameInput.value;
     occupation.textContent = occupationInput.value;
-    popup.classList.remove("popup_open");
+    closeForm ()
   };
   function closeForm () {
     popup.classList.remove("popup_open");
