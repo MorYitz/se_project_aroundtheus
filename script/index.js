@@ -29,3 +29,59 @@ function openForm () {
   openFormButton.addEventListener("click", openForm);
 closeFormButton.addEventListener("click", closeForm);
 popForm.addEventListener("submit", submitForm);
+
+const elements = document.querySelector(".elements");
+const elementList = elements.querySelector(".elements__list");
+
+const initialElements = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg",
+  },
+];
+
+function createElement(data) {
+  const elementTemplate = document.querySelector("#element-template").content;
+  const elementContent = elementTemplate.querySelector(".element").cloneNode(true);
+  const elementName = elementContent.querySelector(".element__name");
+  elementName.textContent = data.name;
+  const likeButton = elementContent.querySelector(".element__like-button");
+  const elementImage = elementContent.querySelector(".element__image");
+  elementImage.src = data.link;
+  elementImage.alt = `Picture of ${data.name}`;
+  const deleteButton = elementContent.querySelector(".card__delete-button");
+   elementImage.addEventListener("click", () => previewImage(data));
+  deleteButton.addEventListener("click", () => elementContent.remove());
+  likeButton.addEventListener("click", () =>
+    toggleClass(likeButton, "element__button_liked")
+  );
+ 
+  return elementContent;
+}
+
+function renderElement(element, list) {
+  list.prepend(createElement(element));
+}
+
+
+initialElements.forEach((element) => renderElement(element, elementList));
