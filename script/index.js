@@ -51,7 +51,7 @@ const placeName = placeForm.querySelector(".form__input_type_place-name");
 const placeURL = placeForm.querySelector(".form__input_type_place-url");
 const placeCloseButton = addPlacePopup.querySelector(".popup__close-button_type_place");
 
-function openForm (popup) {
+function openPopup (popup) {
     popup.classList.add("popup_open");
   };
 
@@ -60,7 +60,7 @@ function openForm (popup) {
     occupationInput.value = occupation.textContent;
   };
 
-  function closeForm (popup) {
+  function closePopup (popup) {
     popup.classList.remove("popup_open");
   };
   
@@ -68,13 +68,13 @@ function openForm (popup) {
     e.preventDefault();
     textName.textContent = nameInput.value;
     occupation.textContent = occupationInput.value;
-    
+    closePopup (profilePopup)
   };
 
   
 profileOpenButton.addEventListener("click", () => {
   fillProfileFormFields();
-  openForm(profilePopup);
+  openPopup(profilePopup);
 });
 
 
@@ -85,7 +85,7 @@ const closeButtons = document.querySelectorAll('.popup__close-button');
 
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
-  button.addEventListener('click', () => closeForm(popup));
+  button.addEventListener('click', () => closePopup(popup));
 });
 
 function toggleClass(component, cl) {
@@ -120,7 +120,7 @@ function previewImage(card) {
   popupImage.src = card.link;
   popupImage.alt = `A picture of ${card.name}`;
   popupCaption.textContent = card.name;
-  openForm(imgPreviewPopup);
+  openPopup(imgPreviewPopup);
 }
 
 
@@ -128,12 +128,9 @@ function previewImage(card) {
 function addCard(event) {
     event.preventDefault();
     renderElement({ name: placeName.value, link: placeURL.value }, elementList);
-    
     placeForm.reset();
+    closePopup (addPlacePopup)
   };
 
-  function renderElement(card, list) {
-    list.prepend(createElement(card));
-  };
   placeForm.addEventListener("submit", addCard);  
-addPlaceButton.addEventListener("click", () => openForm(addPlacePopup));
+addPlaceButton.addEventListener("click", () => openPopup(addPlacePopup));
