@@ -33,7 +33,7 @@
   font-family: "Inter", sans-serif;
   max-width: 330px;
   width: 100%;
-  margin: 34px 64px 54px 36px;
+  margin: 34px 64px 24px 36px;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -59,7 +59,7 @@
 }
 
 .popup__submit-button {
-  margin: 31px auto 36px auto;
+  margin: 48px auto 36px auto;
   align-self: center;
   max-width: 358px;
   width: 100%;
@@ -83,6 +83,13 @@
   opacity: 0.8;
 }
 
+.popup__submit-button_disabled,
+.popup__submit-button_disabled:hover {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
 .popup__box_type_image-preview {
   padding: 0px;
   background-color: transparent;
@@ -120,7 +127,7 @@
     max-width: 238px;
     font-size: 18px;
     line-height: 22px;
-    margin: 25px auto 76px auto;
+    margin: 25px auto 46px auto;
   }
 
   .popup__submit-button {

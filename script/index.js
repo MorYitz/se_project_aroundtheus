@@ -14,6 +14,7 @@ const imgPreviewCloseButton = imgPreviewPopup.querySelector(
   ".popup__close-button_type_image-preview"
 );
 
+
 const initialElements = [
   {
     name: "Yosemite Valley",
@@ -46,12 +47,14 @@ const popupCaption = imgPreviewPopup.querySelector(".popup__caption");
 
 const addPlaceButton = document.querySelector(".profile__add-button");
 const addPlacePopup = document.querySelector(".popup_type_add-place");
-const placeForm = document.querySelector(".popup__form_type_add-place");
+const placeForm = document.querySelector(".form_type_add-place");
 const placeName = placeForm.querySelector(".form__input_type_place-name");
 const placeURL = placeForm.querySelector(".form__input_type_place-url");
 const placeCloseButton = addPlacePopup.querySelector(".popup__close-button_type_place");
 
 function openPopup (popup) {
+  document.addEventListener("keydown", closeWithEscape);
+  document.addEventListener("mousedown", clickOutsideToClose);
     popup.classList.add("popup_open");
   };
 
@@ -61,6 +64,8 @@ function openPopup (popup) {
   };
 
   function closePopup (popup) {
+    document.removeEventListener("mousedown", clickOutsideToClose);
+    document.removeEventListener("keydown", closeWithEscape);
     popup.classList.remove("popup_open");
   };
   
@@ -134,3 +139,17 @@ function addCard(event) {
 
   placeForm.addEventListener("submit", addCard);  
 addPlaceButton.addEventListener("click", () => openPopup(addPlacePopup));
+
+function closeWithEscape(evt) {
+  const currentPopup = document.querySelector(".popup_open");
+  if (evt.key === "Escape") {
+    closePopup(currentPopup);
+  }
+}
+
+function clickOutsideToClose(evt) {
+  const currentPopup = document.querySelector(".popup_open");
+  if (evt.target.classList.contains("popup")) {
+    closePopup(currentPopup);
+  }
+}
