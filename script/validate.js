@@ -22,13 +22,20 @@ const hasValidInputs = (inputList) => {
   return inputList.every((input) => input.validity.valid === true);
 };
 
+const enableButton = (submitButton, settings) => {
+  submitButton.disabled = false;
+  submitButton.classList.remove(settings.inactiveButtonClass);
+};
+const disableButton = (submitButton, settings) => {
+  submitButton.disabled = true;
+  submitButton.classList.add(settings.inactiveButtonClass);
+};
+
 const toggleButton = (inputList, submitButton, settings) => {
   if (hasValidInputs(inputList)) {
-    submitButton.disabled = false;
-    submitButton.classList.remove(settings.inactiveButtonClass);
+    enableButton(submitButton, settings);
   } else {
-    submitButton.disabled = true;
-    submitButton.classList.add(settings.inactiveButtonClass);
+    disableButton(submitButton, settings);
   }
 };
 const setEventListeners = (formElement, settings) => {

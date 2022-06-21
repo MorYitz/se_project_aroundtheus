@@ -11,6 +11,9 @@ const occupation = document.querySelector(".profile__info-class");
 const placeSubmitButton = document.querySelector(
   ".popup__submit-button_type_place"
 );
+const profileSubmitButton = document.querySelector(
+  ".popup__submit-button_type_profile"
+);
 const elements = document.querySelector(".elements");
 const elementList = elements.querySelector(".elements__list");
 const imgPreviewPopup = document.querySelector(".popup_type_image-preview");
@@ -57,10 +60,6 @@ const placeCloseButton = addPlacePopup.querySelector(
   ".popup__close-button_type_place"
 );
 
-const disableButton = (button) => {
-  button.disabled = true;
-  button.classList.add("popup__submit-button_disabled");
-};
 function openPopup(popup) {
   document.addEventListener("keydown", closeWithEscape);
   document.addEventListener("mousedown", clickOutsideToClose);
@@ -87,7 +86,9 @@ function handleProfileFormSubmit(e) {
 
 profileOpenButton.addEventListener("click", () => {
   fillProfileFormFields();
+  profileForm.reset();
   openPopup(profilePopup);
+  disableButton(profileSubmitButton, settings);
 });
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
@@ -120,7 +121,7 @@ function createElement(data) {
   likeButton.addEventListener("click", () =>
     toggleClass(likeButton, "element__button_liked")
   );
-  disableButton(placeSubmitButton);
+  disableButton(placeSubmitButton, settings);
   return elementContent;
 }
 
@@ -148,7 +149,7 @@ placeForm.addEventListener("submit", addCard);
 addPlaceButton.addEventListener(
   "click",
   () => openPopup(addPlacePopup),
-  disableButton(placeSubmitButton)
+  disableButton(placeSubmitButton, settings)
 );
 
 function closeWithEscape(evt) {
