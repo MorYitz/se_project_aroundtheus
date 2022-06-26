@@ -1,3 +1,4 @@
+import { Card } from "./Card.js";
 const profileOpenButton = document.querySelector(".profile__edit-button");
 const profileCloseButton = document.querySelector(
   ".popup__close-button_type_profile"
@@ -86,9 +87,7 @@ function handleProfileFormSubmit(e) {
 
 profileOpenButton.addEventListener("click", () => {
   fillProfileFormFields();
-  profileForm.reset();
   openPopup(profilePopup);
-  disableButton(profileSubmitButton, settings);
 });
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
@@ -100,33 +99,16 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-function toggleLike(component, cl) {
+function toggleClass(component, cl) {
   component.classList.toggle(cl);
 }
 
-function createElement(data) {
-  const elementTemplate = document.querySelector("#element-template").content;
-  const elementContent = elementTemplate
-    .querySelector(".element")
-    .cloneNode(true);
-  const elementName = elementContent.querySelector(".element__name");
-  elementName.textContent = data.name;
-  const likeButton = elementContent.querySelector(".element__like-button");
-  const elementImage = elementContent.querySelector(".element__image");
-  const deleteButton = elementContent.querySelector(".element__delete-button");
-  elementImage.src = data.link;
-  elementImage.alt = `Picture of ${data.name}`;
-  elementImage.addEventListener("click", () => previewImage(data));
-  deleteButton.addEventListener("click", () => elementContent.remove());
-  likeButton.addEventListener("click", () =>
-    toggleClass(likeButton, "element__button_liked")
-  );
-  disableButton(placeSubmitButton, settings);
-  return elementContent;
-}
+const cardTemplateSelector = "#element-template";
 
 function renderElement(element, list) {
-  list.prepend(createElement(element));
+  const card = new Card(element, cardTemplateSelector, previewImage);
+  const cardElement = card.createElement();
+  list.prepend(cardElement);
 }
 
 initialElements.forEach((element) => renderElement(element, elementList));
@@ -165,3 +147,6 @@ function clickOutsideToClose(evt) {
     closePopup(currentPopup);
   }
 }
+
+const editFormValidator = new FormValidator();
+editFormValidator.enableValidation();

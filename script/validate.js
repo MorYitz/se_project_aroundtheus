@@ -48,11 +48,11 @@ const setEventListeners = (formElement, settings) => {
     });
   });
 };
-const enableValidation = (settings) => {
-  const formElements = [...document.querySelectorAll(settings.formSelector)];
+const enableValidation = ({ formSelector, ...rest }) => {
+  const formElements = [...document.querySelectorAll(formSelector)];
   formElements.forEach((formElement) => {
     formElement.addEventListener("submit", (e) => e.preventDefault());
-    setEventListeners(formElement, settings);
+    setEventListeners(formElement, rest);
   });
 };
 
