@@ -5,6 +5,7 @@ export class Card {
     this._data = data;
     this._handeImageClick = handleImageClick;
   }
+
   _previewImage(card) {
     popupImage.src = card.link;
     popupImage.alt = `A picture of ${card.name}`;
@@ -26,15 +27,14 @@ export class Card {
       this._elementContent.remove()
     );
     this._likeButton.addEventListener("click", () => this._toggleClass);
-    this._disableButton(placeSubmitButton, settings);
   };
 
-  _createElement() {
+  createElement() {
     this._elementContent = this._elementTemplate
       .querySelector(".element")
       .cloneNode(true);
-    const elementName = elementContent.querySelector(".element__name");
-    elementName.textContent = data.name;
+    const elementName = this._elementContent.querySelector(".element__name");
+    elementName.textContent = this._data.name;
     this._likeButton = this._elementContent.querySelector(
       ".element__like-button"
     );
@@ -42,8 +42,8 @@ export class Card {
     this._deleteButton = this._elementContent.querySelector(
       ".element__delete-button"
     );
-    elementImage.src = this._data.link;
-    elementImage.alt = `Picture of ${this._data.name}`;
+    this._elementImage.src = this._data.link;
+    this._elementImage.alt = `Picture of ${this._data.name}`;
     this._addEventListeners();
     return this._elementContent;
   }

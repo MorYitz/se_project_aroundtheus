@@ -1,4 +1,5 @@
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 const profileOpenButton = document.querySelector(".profile__edit-button");
 const profileCloseButton = document.querySelector(
   ".popup__close-button_type_profile"
@@ -113,6 +114,19 @@ function renderElement(element, list) {
 
 initialElements.forEach((element) => renderElement(element, elementList));
 
+const settings = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error_visible",
+};
+
+const editFormValidator = new FormValidator(settings);
+// const addCardFormValidator = new FormValidator(settings,)
+editFormValidator.enableValidation();
+
 function previewImage(card) {
   popupImage.src = card.link;
   popupImage.alt = `A picture of ${card.name}`;
@@ -130,8 +144,8 @@ function addCard(event) {
 placeForm.addEventListener("submit", addCard);
 addPlaceButton.addEventListener(
   "click",
-  () => openPopup(addPlacePopup),
-  disableButton(placeSubmitButton, settings)
+  () => openPopup(addPlacePopup)
+  // disableButton(placeSubmitButton, settings)
 );
 
 function closeWithEscape(evt) {
@@ -147,6 +161,3 @@ function clickOutsideToClose(evt) {
     closePopup(currentPopup);
   }
 }
-
-const editFormValidator = new FormValidator();
-editFormValidator.enableValidation();
