@@ -123,9 +123,13 @@ const settings = {
   errorClass: "form__error_visible",
 };
 
-const editFormValidator = new FormValidator(settings);
-// const addCardFormValidator = new FormValidator(settings,)
+const editForm = profileForm.querySelector(".form");
+const addCardForm = placeForm.querySelector(".form");
+
+const editFormValidator = new FormValidator(settings, editForm);
+const addCardFormValidator = new FormValidator(settings, addCardForm);
 editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
 
 function previewImage(card) {
   popupImage.src = card.link;
