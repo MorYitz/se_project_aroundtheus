@@ -8,8 +8,7 @@ import {
   closePopup,
   fillProfileFormFields,
   openPopup,
-  closeButtons,
-  profileOpenButton,
+  profileForm,
 } from "./utils.js";
 const profileCloseButton = document.querySelector(
   ".popup__close-button_type_profile"

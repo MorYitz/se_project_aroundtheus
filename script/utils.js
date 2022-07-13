@@ -69,6 +69,5 @@ export {
   closePopup,
   fillProfileFormFields,
   openPopup,
-  closeButtons,
-  profileOpenButton,
+  profileForm,
 };
