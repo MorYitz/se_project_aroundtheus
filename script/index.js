@@ -86,9 +86,15 @@ function handleProfileFormSubmit(e) {
   closePopup(profilePopup);
 }
 
+function disableButton(submitButton) {
+  submitButton.disabled = true;
+  submitButton.classList.add(this._settings.inactiveButtonClass);
+}
+
 profileOpenButton.addEventListener("click", () => {
   fillProfileFormFields();
   openPopup(profilePopup);
+  profileForm.reset();
 });
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
@@ -123,11 +129,8 @@ const settings = {
   errorClass: "form__error_visible",
 };
 
-const editForm = profileForm.querySelector(".form");
-const addCardForm = placeForm.querySelector(".form");
-
-const editFormValidator = new FormValidator(settings, editForm);
-const addCardFormValidator = new FormValidator(settings, addCardForm);
+const editFormValidator = new FormValidator(settings, profileForm);
+const addCardFormValidator = new FormValidator(settings, placeForm);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
@@ -148,8 +151,9 @@ function addCard(event) {
 placeForm.addEventListener("submit", addCard);
 addPlaceButton.addEventListener(
   "click",
-  () => openPopup(addPlacePopup)
-  // disableButton(placeSubmitButton, settings)
+  () => openPopup(addPlacePopup),
+  placeForm.reset()
+  // addCardFormValidator.resetForm()
 );
 
 function closeWithEscape(evt) {
