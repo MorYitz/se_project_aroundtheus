@@ -12,9 +12,7 @@ export class Card {
     popupCaption.textContent = card.name;
     openPopup(imgPreviewPopup);
   }
-  _toggleClass(component, cl) {
-    component.classList.toggle(cl);
-  }
+
   _disableButton = (submitButton, settings) => {
     submitButton.disabled = true;
     submitButton.classList.add(settings.inactiveButtonClass);
@@ -26,7 +24,9 @@ export class Card {
     this._deleteButton.addEventListener("click", () =>
       this._elementContent.remove()
     );
-    this._likeButton.addEventListener("click", () => this._toggleClass);
+    this._likeButton.addEventListener("click", () =>
+      this._likeButton.classList.toggle("element__button_liked")
+    );
   };
 
   createElement() {

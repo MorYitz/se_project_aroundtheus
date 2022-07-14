@@ -65,10 +65,6 @@ const placeCloseButton = addPlacePopup.querySelector(
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-function toggleClass(component, cl) {
-  component.classList.toggle(cl);
-}
-
 const cardTemplateSelector = "#element-template";
 
 function renderElement(element, list) {
