@@ -62,6 +62,22 @@ const placeURL = placeForm.querySelector(".form__input_type_place-url");
 const placeCloseButton = addPlacePopup.querySelector(
   ".popup__close-button_type_place"
 );
+const settings = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error_visible",
+};
+
+const editFormValidator = new FormValidator(settings, profileForm);
+const addCardFormValidator = new FormValidator(settings, placeForm);
+const addDelete = new FormValidator(settings, placeForm);
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+addDelete.disableButton(placeSubmitButton);
+addDelete.disableButton(profileSubmitButton);
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
@@ -75,31 +91,13 @@ function renderElement(element, list) {
 
 initialElements.forEach((element) => renderElement(element, elementList));
 
-const settings = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".popup__submit-button",
-  inactiveButtonClass: "popup__submit-button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible",
-};
-
-const editFormValidator = new FormValidator(settings, profileForm);
-const addCardFormValidator = new FormValidator(settings, placeForm);
-editFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
-
 function addCard(event) {
   event.preventDefault();
   renderElement({ name: placeName.value, link: placeURL.value }, elementList);
   placeForm.reset();
   closePopup(addPlacePopup);
+  addDelete.disableButton(placeSubmitButton);
 }
 
 placeForm.addEventListener("submit", addCard);
-addPlaceButton.addEventListener(
-  "click",
-  () => openPopup(addPlacePopup),
-  placeForm.reset()
-  // addCardFormValidator.resetForm()
-);
+addPlaceButton.addEventListener("click", () => openPopup(addPlacePopup));
