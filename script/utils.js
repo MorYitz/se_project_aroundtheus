@@ -6,6 +6,10 @@ const textName = document.querySelector(".profile__info-title");
 const occupation = document.querySelector(".profile__info-class");
 const profilePopup = document.querySelector(".popup_type_edit-profile");
 const profileForm = document.querySelector(".form_type_profile");
+const imgPreviewPopup = document.querySelector(".popup_type_image-preview");
+const popupCaption = imgPreviewPopup.querySelector(".popup__caption");
+
+const popupImage = imgPreviewPopup.querySelector(".popup__image");
 closeButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
@@ -37,7 +41,6 @@ function handleProfileFormSubmit(e) {
 profileOpenButton.addEventListener("click", () => {
   fillProfileFormFields();
   openPopup(profilePopup);
-  profileForm.reset();
 });
 
 function previewImage(card) {

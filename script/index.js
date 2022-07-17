@@ -22,7 +22,6 @@ const profileSubmitButton = document.querySelector(
 );
 const elements = document.querySelector(".elements");
 const elementList = elements.querySelector(".elements__list");
-const imgPreviewPopup = document.querySelector(".popup_type_image-preview");
 
 const initialElements = [
   {
@@ -51,9 +50,6 @@ const initialElements = [
   },
 ];
 
-const popupImage = imgPreviewPopup.querySelector(".popup__image");
-const popupCaption = imgPreviewPopup.querySelector(".popup__caption");
-
 const addPlaceButton = document.querySelector(".profile__add-button");
 const addPlacePopup = document.querySelector(".popup_type_add-place");
 const placeForm = document.querySelector(".form_type_add-place");
@@ -77,7 +73,6 @@ const addDelete = new FormValidator(settings, placeForm);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 addDelete.disableButton(placeSubmitButton);
-addDelete.disableButton(profileSubmitButton);
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
