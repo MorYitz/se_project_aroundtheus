@@ -96,6 +96,7 @@ function fillProfileFormFields() {
 profileOpenButton.addEventListener("click", () => {
   fillProfileFormFields();
   openPopup(profilePopup);
+  editFormValidator.resetValidation();
 });
 function previewImage(card) {
   popupImage.src = card.link;
@@ -106,7 +107,6 @@ function previewImage(card) {
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-addCardFormValidator.disableButton(placeSubmitButton);
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
@@ -130,12 +130,11 @@ function addCard(event) {
   renderElement({ name: placeName.value, link: placeURL.value }, elementList);
   placeForm.reset();
   closePopup(addPlacePopup);
-  addCardFormValidator.disableButton();
 }
 
 placeForm.addEventListener("submit", addCard);
 addPlaceButton.addEventListener("click", () => {
   openPopup(addPlacePopup);
   placeForm.reset();
-  addCardFormValidator.resetForm();
+  addCardFormValidator.resetValidation();
 });
