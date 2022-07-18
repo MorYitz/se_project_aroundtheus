@@ -3,16 +3,24 @@ import { FormValidator } from "./FormValidator.js";
 import {
   clickOutsideToClose,
   closeWithEscape,
-  previewImage,
-  handleProfileFormSubmit,
   closePopup,
-  fillProfileFormFields,
   openPopup,
-  profileForm,
 } from "./utils.js";
 const profileCloseButton = document.querySelector(
   ".popup__close-button_type_profile"
 );
+const closeButtons = document.querySelectorAll(".popup__close-button");
+const profileOpenButton = document.querySelector(".profile__edit-button");
+const nameInput = document.querySelector(".form__input");
+const occupationInput = document.querySelector(".form__input:last-of-type");
+const textName = document.querySelector(".profile__info-title");
+const occupation = document.querySelector(".profile__info-class");
+const profilePopup = document.querySelector(".popup_type_edit-profile");
+const profileForm = document.querySelector(".form_type_profile");
+const imgPreviewPopup = document.querySelector(".popup_type_image-preview");
+const popupCaption = imgPreviewPopup.querySelector(".popup__caption");
+
+const popupImage = imgPreviewPopup.querySelector(".popup__image");
 
 const placeSubmitButton = document.querySelector(
   ".popup__submit-button_type_place"
@@ -69,20 +77,51 @@ const settings = {
 
 const editFormValidator = new FormValidator(settings, profileForm);
 const addCardFormValidator = new FormValidator(settings, placeForm);
-const addDelete = new FormValidator(settings, placeForm);
+
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(popup));
+});
+function handleProfileFormSubmit(e) {
+  e.preventDefault();
+  textName.textContent = nameInput.value;
+  occupation.textContent = occupationInput.value;
+  closePopup(profilePopup);
+}
+
+function fillProfileFormFields() {
+  nameInput.value = textName.textContent;
+  occupationInput.value = occupation.textContent;
+}
+profileOpenButton.addEventListener("click", () => {
+  fillProfileFormFields();
+  openPopup(profilePopup);
+});
+function previewImage(card) {
+  popupImage.src = card.link;
+  popupImage.alt = `A picture of ${card.name}`;
+  popupCaption.textContent = card.name;
+  openPopup(imgPreviewPopup);
+}
+
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-addDelete.disableButton(placeSubmitButton);
+addCardFormValidator.disableButton(placeSubmitButton);
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 const cardTemplateSelector = "#element-template";
 
-function renderElement(element, list) {
+const createCard = (element) => {
   const card = new Card(element, cardTemplateSelector, previewImage);
   const cardElement = card.createElement();
-  list.prepend(cardElement);
-}
+
+  return cardElement;
+};
+const renderElement = (element, list) => {
+  const card = createCard(element);
+  list.prepend(card);
+};
 
 initialElements.forEach((element) => renderElement(element, elementList));
 
@@ -91,8 +130,12 @@ function addCard(event) {
   renderElement({ name: placeName.value, link: placeURL.value }, elementList);
   placeForm.reset();
   closePopup(addPlacePopup);
-  addDelete.disableButton(placeSubmitButton);
+  addCardFormValidator.disableButton();
 }
 
 placeForm.addEventListener("submit", addCard);
-addPlaceButton.addEventListener("click", () => openPopup(addPlacePopup));
+addPlaceButton.addEventListener("click", () => {
+  openPopup(addPlacePopup);
+  placeForm.reset();
+  addCardFormValidator.resetForm();
+});

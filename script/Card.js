@@ -6,17 +6,6 @@ export class Card {
     this._handeImageClick = handleImageClick;
   }
 
-  _previewImage(card) {
-    popupImage.src = card.link;
-    popupImage.alt = `A picture of ${card.name}`;
-    popupCaption.textContent = card.name;
-    openPopup(imgPreviewPopup);
-  }
-
-  _disableButton = (submitButton, settings) => {
-    submitButton.disabled = true;
-    submitButton.classList.add(settings.inactiveButtonClass);
-  };
   _addEventListeners = () => {
     this._elementImage.addEventListener("click", () =>
       this._handeImageClick(this._data)
