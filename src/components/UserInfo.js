@@ -10,8 +10,8 @@ this._job = document.querySelector(jobSelector)
     } 
 
     }
-    setUserInfo({name, job}){
-        this._name.textContent = name;
-        this._job.textContent = job;
+    setUserInfo({fullName, className}){
+        this._name.textContent = fullName;
+        this._job.textContent = className;
     }
 }
