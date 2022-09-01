@@ -7,9 +7,9 @@ this._job = document.querySelector(jobSelector)
     { return{
         name: this._name.textContent,
         job: this._job.textContent
-    } 
-
     }
+    };
+    
     setUserInfo({fullName, className}){
         this._name.textContent = fullName;
         this._job.textContent = className;

@@ -52,12 +52,16 @@ const settings = {
 const cardTemplateSelector = "#element-template";
 const createCard = (data) => {
   const card = new Card(data, cardTemplateSelector, ()=>{addPopupImage.open(data.name, data.link)});
-  section.addItem(card.createElement());
-
+  return card.createElement();
 };
 
+const renderCard = (cardData) =>{
+  const cardElement = createCard(cardData);
+  section.addItem(cardElement)
+}
+
 const handleAddCardSubmit = (data) =>{
-  createCard({ name: data["card-title"], link: data["card-link"] }, elementList);
+  renderCard({ name: data["card-title"], link: data["card-link"] }, elementList);
  addCardPopup.close()
 }
 const userInfo = new UserInfo({
@@ -81,13 +85,16 @@ const addCardFormValidator = new FormValidator(settings, placeForm);
 const addPopupImage = new popupWithImage(".popup_type_image-preview");
 addPopupImage.setEventListeners();
 
- const section = new Section({items:initialElements, renderer: createCard}, ".elements__list" )
+ const section = new Section({items:initialElements, renderer: renderCard}, ".elements__list" )
   section.renderItems()
 
+const fillProfileForm = () => {
+  const profileData = userInfo.getUserInfo();
+  nameInput.value = profileData.name;
+  occupationInput.value = profileData.job;
+}
  profileOpenButton.addEventListener("click", () => {
- const profileData = userInfo.getUserInfo();
-   nameInput.value = profileData.name;
-   occupationInput.value = profileData.job;
+  fillProfileForm()
   editProfilePopup.open();
 });
 
@@ -96,6 +103,5 @@ addCardFormValidator.enableValidation();
 
 addPlaceButton.addEventListener("click", () => {
   addCardPopup.open();
-  placeForm.reset();
   addCardFormValidator.resetValidation();
 });

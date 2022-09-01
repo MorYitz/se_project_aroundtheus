@@ -1,4 +1,3 @@
-const ESC_KEYCODE = 27;
 export class Popup {
     constructor(popupSelector){
         this._popup = document.querySelector(popupSelector);
@@ -9,20 +8,22 @@ export class Popup {
             
              this.close()}
      }; 
+
     open (){
         this._popup.classList.add("popup_open");
          document.addEventListener("keyup", this._handleEscClose);
     };
+    
     close (){
         this._popup.classList.remove("popup_open");
          document.removeEventListener("keyup", this._handleEscClose);
     };
     
 setEventListeners(){
-    this._popup.addEventListener("click", (evt) => {
+    this._popup.addEventListener("mousedown", (evt) => {
         if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__close-button")) {
             this.close();
           }
     })
-}
-}
+  }
+}       
