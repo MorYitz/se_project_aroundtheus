@@ -89,7 +89,6 @@ addPopupImage.setEventListeners();
    nameInput.value = profileData.name;
    occupationInput.value = profileData.job;
   editProfilePopup.open();
-//  editFormValidator.resetValidation();
 });
 
 editFormValidator.enableValidation();
