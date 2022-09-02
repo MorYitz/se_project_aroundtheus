@@ -9,6 +9,7 @@ export class FormValidator {
       this._settings.submitButtonSelector
     );
   }
+
   _toggleInputError = (input) => {
     if (input.validity.valid) {
       this._hideInputError(input);
@@ -18,21 +19,21 @@ export class FormValidator {
   };
 
   _showInputError = (input) => {
-    const errorSpan = this._formElement.querySelector(
+    const errorElement = this._formElement.querySelector(
       "#" + input.id + "-error"
     );
     input.classList.add(this._settings.inputErrorClass);
-    errorSpan.textContent = input.validationMessage;
-    errorSpan.classList.add(this._settings.errorClass);
+    errorElement.textContent = input.validationMessage;
+    errorElement.classList.add(this._settings.errorClass);
   };
 
   _hideInputError = (input) => {
-    const errorSpan = this._formElement.querySelector(
+    const errorElement = this._formElement.querySelector(
       "#" + input.id + "-error"
     );
     input.classList.remove(this._settings.inputErrorClass);
-    errorSpan.textContent = "";
-    errorSpan.classList.remove(this._settings.errorClass);
+    errorElement.textContent = "";
+    errorElement.classList.remove(this._settings.errorClass);
   };
 
   _enableButton = () => {
@@ -63,13 +64,13 @@ export class FormValidator {
         this._toggleButton();
       });
     });
-  };
+  }
 
   resetValidation() {
     this._toggleButton();
     this._inputList.forEach(this._hideInputError);
-  };
-  
+  }
+
   enableValidation() {
     this._formElement.addEventListener("submit", (e) => {
       e.preventDefault();
