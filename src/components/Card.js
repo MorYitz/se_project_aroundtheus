@@ -24,13 +24,13 @@ export class Card {
   };
 
   _getElement = () => {
-    return (this._elementContent = this._elementTemplate
+    return (this._elementTemplate
       .querySelector(".element")
       .cloneNode(true));
   };
 
   createElement() {
-    this._getElement();
+    this._elementContent = this._getElement();
     const elementName = this._elementContent.querySelector(".element__name");
     elementName.textContent = this._data.name;
     this._likeButton = this._elementContent.querySelector(

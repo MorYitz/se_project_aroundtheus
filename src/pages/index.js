@@ -1,7 +1,7 @@
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
-import { popupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 import "./index.css";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -94,7 +94,7 @@ addCardPopup.setEventListeners();
 const editFormValidator = new FormValidator(settings, profileForm);
 const addCardFormValidator = new FormValidator(settings, placeForm);
 
-const addPopupImage = new popupWithImage(".popup_type_image-preview");
+const addPopupImage = new PopupWithImage(".popup_type_image-preview");
 addPopupImage.setEventListeners();
 
 const section = new Section(
