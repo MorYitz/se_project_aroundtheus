@@ -5,6 +5,26 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import "./index.css";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
+import { api } from "../components/Api.js";
+import { PopupWithSubmit } from "../components/PopupWithSubmit.js";
+const confirmPopup = new PopupWithSubmit("popup_type_delete")
+ confirmPopup.setEventListeners()
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo(res.name, res.about);
+    console.log("res getUserInfo =>", res);
+  })
+  .catch(console.log);
+
+api
+  .getCards()
+  .then((res) => {
+    console.log("res getCards =>", res);
+    section.renderItems(res);
+  })
+  .catch(console.log);
+
 const profileOpenButton = document.querySelector(".profile__edit-button");
 const nameInput = document.querySelector(".form__input");
 const occupationInput = document.querySelector(".form__input:last-of-type");
@@ -49,13 +69,17 @@ const settings = {
   inputErrorClass: "form__input_type_error",
   errorClass: "form__error_visible",
 };
-
 const cardTemplateSelector = "#element-template";
+
+
+
 const createCard = (data) => {
   const card = new Card(data, cardTemplateSelector, () => {
     addPopupImage.open(data.name, data.link);
+  }, ()=> {
+     confirmPopup.open()
   });
-  return card.createElement();
+  section.addItem(card.createElement());
 };
 
 const renderCard = (cardData) => {
@@ -64,10 +88,13 @@ const renderCard = (cardData) => {
 };
 
 const handleAddCardSubmit = (data) => {
-  renderCard(
-    { name: data["card-title"], link: data["card-link"] },
-    elementList
-  );
+  api
+    .addCard(data["card-title"], data["card-link"])
+    .then((res) => {
+      renderCard({ name: res.name, link: res.link }, elementList);
+    })
+    .catch(console.log);
+
   addCardPopup.close();
 };
 const userInfo = new UserInfo({
@@ -76,8 +103,16 @@ const userInfo = new UserInfo({
 });
 
 const handleProfileFormSubmit = (data) => {
-  userInfo.setUserInfo(data);
-  editProfilePopup.close();
+  api
+    .editProfile(data.fullName, data.className)
+    .then((res) => {
+      userInfo.setUserInfo(data.fullName, data.className);
+      console.log("res editProfile =>", res);
+    })
+    .catch(console.log)
+    .finally(() => {
+      editProfilePopup.close();
+    });
 };
 
 const addCardPopup = new PopupWithForm(
@@ -97,11 +132,7 @@ const addCardFormValidator = new FormValidator(settings, placeForm);
 const addPopupImage = new PopupWithImage(".popup_type_image-preview");
 addPopupImage.setEventListeners();
 
-const section = new Section(
-  { items: initialElements, renderer: renderCard },
-  ".elements__list"
-);
-section.renderItems();
+const section = new Section({ renderer: renderCard }, ".elements__list");
 
 const fillProfileForm = () => {
   const profileData = userInfo.getUserInfo();

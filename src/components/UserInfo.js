@@ -11,7 +11,7 @@ export class UserInfo {
     };
   }
 
-  setUserInfo({ fullName, className }) {
+  setUserInfo( fullName, className ) {
     this._name.textContent = fullName;
     this._job.textContent = className;
   }
