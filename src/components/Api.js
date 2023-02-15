@@ -36,11 +36,17 @@ class Api {
       }),
     }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
   }
-  deleteCard(name, link) {
-    return fetch(`${this._baseUrl} + cards/${cardID}}`, {
+  deleteCard(cardID) {
+    return fetch(this._baseUrl + "cards" + cardID, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
+    });
+  }
+  likeCard(cardID) {
+    return fetch(this._baseUrl + "cards/likes" + cardID, {
+      method: "PUT",
+      headers: this._headers,
+    });
   }
 }
 

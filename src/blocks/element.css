@@ -24,7 +24,7 @@
   line-height: 29px;
 }
 .element__name {
-  display: inline-block;
+  align-self: center;
   font-size: 24px;
   line-height: 29px;
   font-weight: 900;
@@ -34,6 +34,18 @@
   text-overflow: ellipsis;
   max-width: 220px;
   margin: 0;
+}
+
+.element__likes {
+  display: flex;
+  flex-direction: column;
+}
+
+.element__like {
+  padding-left: 7px;
+  max-width: 9px;
+  max-height: 13px;
+  font-size: 13px;
 }
 .element__like-button {
   width: 21px;

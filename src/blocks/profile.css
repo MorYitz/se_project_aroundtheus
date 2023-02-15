@@ -10,6 +10,14 @@
   max-width: 168px;
   max-height: 127px;
 }
+
+.profile__image-change{
+   display: none;
+  position: absolute;
+  left: 247px;
+  top: 206px;
+}
+
 .profile__info {
   color: #fff;
   margin: 22px 0 21px 30px;

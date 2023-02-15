@@ -7,24 +7,10 @@ import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { api } from "../components/Api.js";
 import { PopupWithSubmit } from "../components/PopupWithSubmit.js";
-const confirmPopup = new PopupWithSubmit("popup_type_delete")
- confirmPopup.setEventListeners()
-api
-  .getUserInfo()
-  .then((res) => {
-    userInfo.setUserInfo(res.name, res.about);
-    console.log("res getUserInfo =>", res);
-  })
-  .catch(console.log);
-
-api
-  .getCards()
-  .then((res) => {
-    console.log("res getCards =>", res);
-    section.renderItems(res);
-  })
-  .catch(console.log);
-
+const avatar = document.querySelector(".profile__image");
+const avatarChange = document.querySelector(".profile__image-change");
+const confirmPopup = new PopupWithSubmit(".popup_type_delete");
+const confirmchange = new PopupWithSubmit(".popup_type_change-avatar");
 const profileOpenButton = document.querySelector(".profile__edit-button");
 const nameInput = document.querySelector(".form__input");
 const occupationInput = document.querySelector(".form__input:last-of-type");
@@ -70,15 +56,59 @@ const settings = {
   errorClass: "form__error_visible",
 };
 const cardTemplateSelector = "#element-template";
+avatar.onmouseover = function () {
+  avatarChange.style.display = "block";
+  avatar.style.opacity = "0.2";
+};
+avatarChange.onmouseover = function () {
+  avatarChange.style.display = "block";
+  avatar.style.opacity = "0.2";
+};
+avatar.onmouseout = function () {
+  avatarChange.style.display = "none";
+  avatar.style.opacity = "1";
+};
 
+confirmPopup.setEventListeners();
+avatar.addEventListener("click", () => {
+  confirmchange.open();
+});
 
+let userId;
+
+Promise.all([api.getCards(), api.getUserInfo()]).then(
+  ([cardData, userData]) => {
+    userId = userData._id;
+    section.renderItems(cardData);
+    userInfo.setUserInfo(userData.name, userData.about);
+  }
+);
 
 const createCard = (data) => {
-  const card = new Card(data, cardTemplateSelector, () => {
-    addPopupImage.open(data.name, data.link);
-  }, ()=> {
-     confirmPopup.open()
-  });
+  const card = new Card(
+    data,
+    userId,
+    cardTemplateSelector,
+    () => {
+      addPopupImage.open(data.name, data.link);
+    },
+
+    (id) => {
+      confirmPopup.open();
+      confirmPopup.setAction(() => {
+        api.deleteCard(id).then((res) => {
+          card.removeCard();
+          confirmPopup.close();
+        });
+      });
+    },
+    (id) => {
+      api.likeCard(id).then((res) => {
+        card.heartLiked(res.likes);
+        console.log("res", res);
+      });
+    }
+  );
   section.addItem(card.createElement());
 };
 

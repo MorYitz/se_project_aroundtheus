@@ -1,39 +1,55 @@
 export class Card {
-  constructor(data, cardTemplateSelector, handleImageClick, handleDelete) {
+  constructor(
+    data,
+    userId,
+    cardTemplateSelector,
+    handleImageClick,
+    handleDelete,
+    handeLikeIcon
+  ) {
     this._elementTemplate =
       document.querySelector(cardTemplateSelector).content;
     this._data = data;
+    this._id = data._id;
     this._handeImageClick = handleImageClick;
     this._handleDelete = handleDelete;
-    this._likes = likes;
+    this._userId = userId;
+    this._ownerId = data.owner._id;
+    this._likes = data.likes;
+    this._handeLikeIcon = handeLikeIcon;
   }
 
-  // _handleDelete = () => {
-  //   this._elementContent.remove();
+  removeCard = () => {
+    this._elementContent.remove();
 
-  //   this._elementContent = null;
-  // };
-
-  _handleLike = () => {
-    this._likeButton.classList.toggle("element__button_liked");
+    this._elementContent = null;
   };
+
+  //  _handleLike = () => {
+  //    this._likeButton.classList.toggle("element__button_liked");
+  //  };
 
   _addEventListeners = () => {
     this._elementImage.addEventListener("click", () =>
       this._handeImageClick(this._data)
     );
     this._deleteButton.addEventListener("click", this._handleDelete);
-    this._likeButton.addEventListener("click", this._handleLike);
+    this._likeButton.addEventListener("click", this._handeLikeIcon);
   };
 
   _getElement = () => {
     return this._elementTemplate.querySelector(".element").cloneNode(true);
   };
 
-  _setLikesAmount() {
-    const likes = this._likes.length;
-    this._elementContent.querySelector(".element__likes").textContent =
-      likesAmount;
+  heartLiked(newLikes) {
+    this._likes = newLikes;
+    this._elementContent.querySelector(".element__like").textContent =
+      this._likes.length;
+
+    const isLiked = this._likes.find((person) => person._id === this._userId);
+    if (isLiked) {
+      this._likeButton.classList.toggle("element__button_liked");
+    }
   }
 
   createElement() {
@@ -49,8 +65,15 @@ export class Card {
     );
     this._elementImage.src = this._data.link;
     this._elementImage.alt = `Picture of ${this._data.name}`;
+
+    if (this._ownerId !== this._userId) {
+      this._elementContent.querySelector(
+        ".element__delete-button"
+      ).style.display = "none";
+    }
     this._addEventListeners();
-     this._setLikesAmount();
+    this.heartLiked(this._likes);
+
     return this._elementContent;
   }
 }

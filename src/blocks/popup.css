@@ -90,6 +90,10 @@
   color: rgba(0, 0, 0, 0.2);
   cursor: default;
 }
+
+.popup__submit-button_type_delete{
+  margin-top: 14px
+}
 .popup__box_type_image-preview {
   padding: 0px;
   background-color: transparent;
