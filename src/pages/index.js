@@ -18,33 +18,6 @@ const profileForm = document.querySelector(".form_type_profile");
 const elements = document.querySelector(".elements");
 const elementList = elements.querySelector(".elements__list");
 
-const initialElements = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
-
 const addPlaceButton = document.querySelector(".profile__add-button");
 const placeForm = document.querySelector(".form_type_add-place");
 const settings = {
@@ -84,7 +57,8 @@ Promise.all([api.getCards(), api.getUserInfo()]).then(
   }
 );
 
-const createCard = (data) => {
+
+const renderCard = (data) => {
   const card = new Card(
     data,
     userId,
@@ -93,37 +67,44 @@ const createCard = (data) => {
       addPopupImage.open(data.name, data.link);
     },
 
-    (id) => {
+    () => {
       confirmPopup.open();
       confirmPopup.setAction(() => {
-        api.deleteCard(id).then((res) => {
-          card.removeCard();
-          confirmPopup.close();
+        api.deleteCard(card.getId()).then((res) => {
+          console.log("delete")
+           card.removeCard();
+           confirmPopup.close();
         });
       });
     },
-    (id) => {
-      api.likeCard(id).then((res) => {
-        card.heartLiked(res.likes);
-        console.log("res", res);
-      });
+    () => {
+      if (card.isLiked()) {
+        api.disLikeCard(card.getId()).then((res) => {
+          card.setLikes(res.likes);
+          console.log("res", res);
+        });
+      } else { 
+        api.likeCard(card.getId()).then((res) => {
+          card.setLikes(res.likes);
+          console.log("res", res);
+        })
+      }
     }
   );
   section.addItem(card.createElement());
 };
 
-const renderCard = (cardData) => {
-  const cardElement = createCard(cardData);
-  section.addItem(cardElement);
-};
+
 
 const handleAddCardSubmit = (data) => {
+  addCardPopup.loadingRender(true, "Saving...");
   api
-    .addCard(data["card-title"], data["card-link"])
+    .addCard(data["card-title"], data.link)
     .then((res) => {
       renderCard({ name: res.name, link: res.link }, elementList);
     })
-    .catch(console.log);
+    .catch(console.log)
+     .finally(() => addCardPopup.loadingRender(false));
 
   addCardPopup.close();
 };
@@ -133,6 +114,7 @@ const userInfo = new UserInfo({
 });
 
 const handleProfileFormSubmit = (data) => {
+  editProfilePopup.loadingRender(true, "Saving...");
   api
     .editProfile(data.fullName, data.className)
     .then((res) => {
@@ -141,7 +123,7 @@ const handleProfileFormSubmit = (data) => {
     })
     .catch(console.log)
     .finally(() => {
-      editProfilePopup.close();
+      editProfilePopup.close(), () => addCardPopup.loadingRender(false);;
     });
 };
 
@@ -151,9 +133,10 @@ const addCardPopup = new PopupWithForm(
 );
 const editProfilePopup = new PopupWithForm(
   ".popup_type_edit-profile",
-  handleProfileFormSubmit
+  handleProfileFormSubmit,
 );
 editProfilePopup.setEventListeners();
+
 
 addCardPopup.setEventListeners();
 const editFormValidator = new FormValidator(settings, profileForm);

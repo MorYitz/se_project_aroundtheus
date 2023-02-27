@@ -36,17 +36,35 @@ class Api {
       }),
     }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
   }
+
   deleteCard(cardID) {
-    return fetch(this._baseUrl + "cards" + cardID, {
+    return fetch(this._baseUrl + "/cards/" + cardID, {
       method: "DELETE",
       headers: this._headers,
-    });
+    }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
   }
+  setAvatarImage(url) {
+    return fetch(this._baseUrl + "/cards/avatar", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: url,
+      }),
+    }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
+  }
+
   likeCard(cardID) {
-    return fetch(this._baseUrl + "cards/likes" + cardID, {
+    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
       method: "PUT",
       headers: this._headers,
-    });
+    }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
+  }
+
+  disLikeCard(cardID) {
+    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
   }
 }
 
