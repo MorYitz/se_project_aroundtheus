@@ -24,6 +24,10 @@ export class Card {
   getId() {
     return this._id;
   }
+
+  getUrl(){
+    return this._link;
+  }
   removeCard = () => {
     this._elementContent.remove();
 

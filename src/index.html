@@ -24,7 +24,6 @@
       </header>
       <main class="main">
         <section class="profile">
-          
           <img
             class="profile__image"
             src="<%=require('./images/Avatar.svg') %>"
@@ -36,7 +35,6 @@
             alt="change avatar image"
           />
 
-          
           <div class="profile__info">
             <h1 class="profile__info-title">Jacques Cousteau</h1>
             <button
@@ -137,7 +135,7 @@
             <input
               id="url-input"
               type="url"
-              name="card-link"
+              name="link"
               placeholder="Image link"
               class="form__input form__input_type_place-url"
               required
@@ -166,7 +164,7 @@
           action="submit"
           class="form form_type_profile"
           name="profile-form"
-          id="form"
+          id="profile-input"
           autocomplete="off"
         >
           <fieldset class="form__fieldset">
@@ -178,7 +176,7 @@
               placeholder=""
               minlength="2"
               required
-            />
+            /><span class="form__input-error" id="avatar-input-error"></span>
           </fieldset>
           <button
             class="popup__submit-button popup__submit-button_type_profile"
