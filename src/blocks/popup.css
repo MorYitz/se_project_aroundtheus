@@ -30,7 +30,7 @@
 }
 
 .popup__title {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   max-width: 330px;
   width: 100%;
   margin: 34px 64px 24px 36px;
@@ -67,7 +67,7 @@
   background: #000000;
   border-radius: 2px;
   border: none;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -91,9 +91,10 @@
   cursor: default;
 }
 
-.popup__submit-button_type_delete{
-  margin-top: 14px
+.popup__submit-button_type_delete {
+  margin-top: 14px;
 }
+
 .popup__box_type_image-preview {
   padding: 0px;
   background-color: transparent;
