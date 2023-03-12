@@ -25,7 +25,7 @@ export class Card {
     return this._id;
   }
 
-  getUrl(){
+  getUrl() {
     return this._link;
   }
   removeCard = () => {
@@ -35,26 +35,26 @@ export class Card {
   };
 
   _addEventListeners = () => {
-    this._elementImage.addEventListener("click", () =>
+    this._elementImage.addEventListener('click', () =>
       this._handeImageClick(this._data)
     );
-    this._deleteButton.addEventListener("click", this._handleDelete);
-    this._likeButton.addEventListener("click", this._handeLikeIcon);
+    this._deleteButton.addEventListener('click', this._handleDelete);
+    this._likeButton.addEventListener('click', this._handeLikeIcon);
   };
 
   _getElement = () => {
-    return this._elementTemplate.querySelector(".element").cloneNode(true);
+    return this._elementTemplate.querySelector('.element').cloneNode(true);
   };
 
   setLikes(newlikes) {
     this._likes = newlikes;
-    this._elementContent.querySelector(".element__like").textContent =
+    this._elementContent.querySelector('.element__like').textContent =
       this._likes.length;
     const isLikedByCurrentUser = this.isLiked();
     if (isLikedByCurrentUser) {
-      this._likeButton.classList.add("element__button_liked");
+      this._likeButton.classList.add('element__button_liked');
     } else {
-      this._likeButton.classList.remove("element__button_liked");
+      this._likeButton.classList.remove('element__button_liked');
     }
   }
 
@@ -64,22 +64,22 @@ export class Card {
 
   createElement() {
     this._elementContent = this._getElement();
-    const elementName = this._elementContent.querySelector(".element__name");
+    const elementName = this._elementContent.querySelector('.element__name');
     elementName.textContent = this._data.name;
     this._likeButton = this._elementContent.querySelector(
-      ".element__like-button"
+      '.element__like-button'
     );
-    this._elementImage = this._elementContent.querySelector(".element__image");
+    this._elementImage = this._elementContent.querySelector('.element__image');
     this._deleteButton = this._elementContent.querySelector(
-      ".element__delete-button"
+      '.element__delete-button'
     );
     this._elementImage.src = this._data.link;
     this._elementImage.alt = `Picture of ${this._data.name}`;
 
     if (this._ownerId !== this._userId) {
       this._elementContent.querySelector(
-        ".element__delete-button"
-      ).style.display = "none";
+        '.element__delete-button'
+      ).style.display = 'none';
     }
     this.setLikes(this._likes);
     this._addEventListeners();

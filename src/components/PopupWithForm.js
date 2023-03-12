@@ -1,13 +1,13 @@
-import { Popup } from "./Popup.js";
+import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
   constructor(popupSelector, handleSubmit) {
     super(popupSelector);
     this._handleSubmit = handleSubmit;
-    this._form = this._popup.querySelector(".form");
-    this._buttonSubmit = this._popup.querySelectorAll('.popup__submit-button');
+    this._form = this._popup.querySelector('.form');
+    this._buttonSubmit = this._form.querySelector('.popup__submit-button');
     this._buttonSubmitText = this._buttonSubmit.textContent;
-    this._inputs = [...this._form.querySelectorAll(".form__input")];
+    this._inputs = [...this._form.querySelectorAll('.form__input')];
   }
 
   _getInputValues() {
@@ -20,15 +20,20 @@ export class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (e) => {
+    this._form.addEventListener('submit', (e) => {
       e.preventDefault();
       this._handleSubmit(this._getInputValues());
     });
   }
 
-  loadingRender(isLoading, textLoading = "saving...") {
-    isLoading ? this._buttonSubmit.textContent = textLoading : this._buttonSubmit.textContent = this._buttonSubmitText;
-}
+  loadingRender(textType) {
+    if (textType === 'saving') {
+      this._buttonSubmit.textContent = 'Saving...';
+    }
+    if (textType === 'initial') {
+      this._buttonSubmit.textContent = this._buttonSubmitText;
+    }
+  }
 
   close() {
     super.close();

@@ -24,16 +24,14 @@
       </header>
       <main class="main">
         <section class="profile">
-          <img
-            class="profile__image"
-            src="<%=require('./images/Avatar.svg') %>"
-            alt="change avatar image"
-          />
-          <img
-            class="profile__image-change"
-            src="<%=require('./images/Vector.svg') %>"
-            alt="change avatar image"
-          />
+          <div class="profile__avatar">
+            <img
+              class="profile__image"
+              src="<%=require('./images/Avatar.svg') %>"
+              alt="avatar image"
+            />
+            <div class="profile__image-change"></div>
+          </div>
 
           <div class="profile__info">
             <h1 class="profile__info-title">Jacques Cousteau</h1>
@@ -170,7 +168,7 @@
           <fieldset class="form__fieldset">
             <input
               class="form__input form__input_type_change-avatar"
-              type="text"
+              type="url"
               id="avatar-input"
               name="avatar"
               placeholder=""

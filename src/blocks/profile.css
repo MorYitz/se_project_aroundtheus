@@ -7,17 +7,35 @@
   width: 100%;
 }
 .profile__image {
+  height: 100%;
   max-width: 120px;
   border-radius: 50%;
   max-height: 120px;
   width: 100%;
 }
+.profile__avatar {
+  position: relative;
+}
+
+.profile__image-change:hover {
+  opacity: 1;
+  cursor: pointer;
+}
 
 .profile__image-change {
-  display: none;
   position: absolute;
-  left: 247px;
-  top: 206px;
+  top: 0;
+  left: 0;
+  background-image: url('../images/pen.svg');
+  background-color: rgba(0, 0, 0, 0.8);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  opacity: 0;
+  transition: 0.4s ease-in-out;
+  max-width: 120px;
+  max-height: 120px;
+  height: 100%;
 }
 
 .profile__info {

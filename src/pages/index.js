@@ -29,21 +29,9 @@ const settings = {
   errorClass: 'form__error_visible',
 };
 const cardTemplateSelector = '#element-template';
-avatar.onmouseover = function () {
-  avatarChange.style.display = 'block';
-  avatar.style.opacity = '0.2';
-};
-avatarChange.onmouseover = function () {
-  avatarChange.style.display = 'block';
-  avatar.style.opacity = '0.2';
-};
-avatar.onmouseout = function () {
-  avatarChange.style.display = 'none';
-  avatar.style.opacity = '1';
-};
 
 confirmPopup.setEventListeners();
-avatar.addEventListener('click', () => {
+avatarChange.addEventListener('click', () => {
   confirmchange.open();
 });
 
@@ -95,14 +83,14 @@ const renderCard = (data) => {
 };
 
 const handleAddCardSubmit = (data) => {
-  addCardPopup.loadingRender(true, 'Saving...');
+  addCardPopup.loadingRender('saving');
   api
     .addCard(data['card-title'], data.link)
     .then((res) => {
       renderCard(res, elementList);
     })
     .catch(console.log)
-    .finally(() => addCardPopup.loadingRender(false));
+    .finally(() => addCardPopup.loadingRender('initial'));
 
   addCardPopup.close();
 };
@@ -113,24 +101,32 @@ const userInfo = new UserInfo({
 });
 
 const handleProfileFormSubmit = (data) => {
-  editProfilePopup.loadingRender(true, 'Saving...');
+  editProfilePopup.loadingRender('saving');
   api
     .editProfile(data.fullName, data.className)
     .then((res) => {
       userInfo.setUserInfo(data.fullName, data.className);
+
       console.log('res editProfile =>', res);
     })
     .catch(console.log)
     .finally(() => {
-      editProfilePopup.close(), () => addCardPopup.loadingRender(false);
+      editProfilePopup.close(), () => editProfilePopup.loadingRender('initial');
     });
 };
 
 const handleAvatarFormSubmit = (data) => {
-  api.editAvatar(data.avatar).then((res) => {
-    userInfo.setAvatarInfo(res);
-    popupChangeAvatrImage.close();
-  });
+  popupChangeAvatrImage.loadingRender('saving');
+
+  api
+    .editAvatar(data.avatar)
+    .then((res) => {
+      userInfo.setAvatarInfo(res.avatar);
+    })
+    .finally(() => {
+      popupChangeAvatrImage.loadingRender('initial'),
+        popupChangeAvatrImage.close();
+    });
 };
 const popupChangeAvatrImage = new PopupWithForm(
   '.popup_type_change-avatar',
