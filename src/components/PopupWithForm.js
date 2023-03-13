@@ -26,11 +26,10 @@ export class PopupWithForm extends Popup {
     });
   }
 
-  loadingRender(textType) {
-    if (textType === 'saving') {
-      this._buttonSubmit.textContent = 'Saving...';
-    }
-    if (textType === 'initial') {
+  loadingRender(isLoading, loadingText = 'Saving...') {
+    if (isLoading) {
+      this._buttonSubmit.textContent = loadingText;
+    } else {
       this._buttonSubmit.textContent = this._buttonSubmitText;
     }
   }

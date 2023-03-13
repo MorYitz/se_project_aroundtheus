@@ -10,7 +10,6 @@ import { PopupWithSubmit } from '../components/PopupWithSubmit.js';
 const avatar = document.querySelector('.profile__image');
 const avatarChange = document.querySelector('.profile__image-change');
 const confirmPopup = new PopupWithSubmit('.popup_type_delete');
-const confirmchange = new PopupWithSubmit('.popup_type_change-avatar');
 const profileOpenButton = document.querySelector('.profile__edit-button');
 const nameInput = document.querySelector('.form__input');
 const occupationInput = document.querySelector('.form__input:last-of-type');
@@ -32,19 +31,20 @@ const cardTemplateSelector = '#element-template';
 
 confirmPopup.setEventListeners();
 avatarChange.addEventListener('click', () => {
-  confirmchange.open();
+  avatarFormValidator.resetValidation();
+  popupChangeAvatrImage.open();
 });
 
 let userId;
 
-Promise.all([api.getCards(), api.getUserInfo()]).then(
-  ([cardData, userData]) => {
+Promise.all([api.getCards(), api.getUserInfo()])
+  .then(([cardData, userData]) => {
     userId = userData._id;
     section.renderItems(cardData);
     userInfo.setUserInfo(userData.name, userData.about);
     userInfo.setAvatarInfo(userData.avatar);
-  }
-);
+  })
+  .catch(console.log);
 
 const renderCard = (data) => {
   const card = new Card(
@@ -58,24 +58,32 @@ const renderCard = (data) => {
     () => {
       confirmPopup.open();
       confirmPopup.setAction(() => {
-        api.deleteCard(card.getId()).then((res) => {
-          console.log('delete');
-          card.removeCard();
-          confirmPopup.close();
-        });
+        api
+          .deleteCard(card.getId())
+          .then((res) => {
+            card.removeCard();
+            confirmPopup.close();
+          })
+          .catch(console.log);
       });
     },
     () => {
       if (card.isLiked()) {
-        api.disLikeCard(card.getId()).then((res) => {
-          card.setLikes(res.likes);
-          console.log('res', res);
-        });
+        api
+          .disLikeCard(card.getId())
+          .then((res) => {
+            card.setLikes(res.likes);
+            console.log('res', res);
+          })
+          .catch(console.log);
       } else {
-        api.likeCard(card.getId()).then((res) => {
-          card.setLikes(res.likes);
-          console.log('res', res);
-        });
+        api
+          .likeCard(card.getId())
+          .then((res) => {
+            card.setLikes(res.likes);
+            console.log('res', res);
+          })
+          .catch(console.log);
       }
     }
   );
@@ -88,11 +96,10 @@ const handleAddCardSubmit = (data) => {
     .addCard(data['card-title'], data.link)
     .then((res) => {
       renderCard(res, elementList);
+      addCardPopup.close();
     })
     .catch(console.log)
-    .finally(() => addCardPopup.loadingRender('initial'));
-
-  addCardPopup.close();
+    .finally(() => addCardPopup.loadingRender());
 };
 const userInfo = new UserInfo({
   nameSelector: '.profile__info-title',
@@ -106,12 +113,12 @@ const handleProfileFormSubmit = (data) => {
     .editProfile(data.fullName, data.className)
     .then((res) => {
       userInfo.setUserInfo(data.fullName, data.className);
-
+      editProfilePopup.close();
       console.log('res editProfile =>', res);
     })
     .catch(console.log)
     .finally(() => {
-      editProfilePopup.close(), () => editProfilePopup.loadingRender('initial');
+      editProfilePopup.loadingRender();
     });
 };
 
@@ -122,10 +129,11 @@ const handleAvatarFormSubmit = (data) => {
     .editAvatar(data.avatar)
     .then((res) => {
       userInfo.setAvatarInfo(res.avatar);
+      popupChangeAvatrImage.close();
     })
+    .catch(console.log)
     .finally(() => {
-      popupChangeAvatrImage.loadingRender('initial'),
-        popupChangeAvatrImage.close();
+      popupChangeAvatrImage.loadingRender();
     });
 };
 const popupChangeAvatrImage = new PopupWithForm(
@@ -161,6 +169,7 @@ const fillProfileForm = () => {
 profileOpenButton.addEventListener('click', () => {
   fillProfileForm();
   editProfilePopup.open();
+  editFormValidator.resetValidation();
 });
 
 editFormValidator.enableValidation();

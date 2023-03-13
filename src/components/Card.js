@@ -29,7 +29,7 @@ export class Card {
     return this._link;
   }
   removeCard = () => {
-    this._elementContent.remove();
+    this._elementContent.remove;
 
     this._elementContent = null;
   };
@@ -48,8 +48,8 @@ export class Card {
 
   setLikes(newlikes) {
     this._likes = newlikes;
-    this._elementContent.querySelector('.element__like').textContent =
-      this._likes.length;
+    this._elementLike = this._elementContent.querySelector('.element__like');
+    this._elementLike.textContent = this._likes.length;
     const isLikedByCurrentUser = this.isLiked();
     if (isLikedByCurrentUser) {
       this._likeButton.classList.add('element__button_liked');
