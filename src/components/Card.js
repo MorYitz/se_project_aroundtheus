@@ -29,7 +29,7 @@ export class Card {
     return this._link;
   }
   removeCard = () => {
-    this._elementContent.remove;
+    this._elementContent.remove();
 
     this._elementContent = null;
   };
